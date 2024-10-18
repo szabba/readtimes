@@ -1,7 +1,9 @@
 package main
 
 import (
+	"errors"
 	"flag"
+	"fmt"
 	"log"
 	"time"
 
@@ -11,6 +13,8 @@ import (
 var (
 	format string
 	sched  Schedule
+
+	errReadUnsupported = errors.New("unsupported platform")
 )
 
 func main() {
@@ -23,7 +27,15 @@ func main() {
 	flag.Parse()
 
 	for {
-		log.Printf("It is now %s.", time.Now().Format(format))
+		msg := fmt.Sprintf("It is now %s.", time.Now().Format(format))
+
+		err := read(msg)
+		if errors.Is(err, errReadUnsupported) {
+			log.Fatal(err)
+		}
+		if err != nil {
+			log.Print(err)
+		}
 
 		next := sched.Next()
 		left := time.Until(next)
