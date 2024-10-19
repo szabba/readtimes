@@ -1,4 +1,4 @@
-module github.com/szabba/readtime
+module github.com/szabba/readtimes
 
 go 1.23.2
 
