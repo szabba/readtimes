@@ -13,10 +13,16 @@ $ go build .
 This will succeed on unsupported platforms.
 However the program will exit promptly reporting the lack of support.
 
+> **NOTE:** On Windows you might want to add `-ldflags="-H windowsgui"` to the CLI.
+>
+> ```bash
+> $ go build -ldflags="-H windowsgui" .
+> ```
+
 ## Running
 
 ```bash
-$ ./readtime.exe
+$ ./readtime
 ```
 
 By default:
@@ -31,7 +37,7 @@ By default:
 The following command will print out the supported CLI flags.
 
 ```bash
-$ ./readtime.exe -help
+$ ./readtime -help
 
 ```
 

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"syscall"
 )
 
 //go:embed tts.ps1
@@ -14,8 +15,10 @@ func read(text string) error {
 	cmd := exec.Command("powershell", "-Command", psScript)
 
 	cmd.Env = []string{
-		fmt.Sprintf("TTS_TEXT=%s", text),
+		fmt.Sprintf("TTS_TEXT=%q", text),
 	}
+
+	cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
 
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
