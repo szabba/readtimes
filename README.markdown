@@ -38,7 +38,6 @@ The following command will print out the supported CLI flags.
 
 ```bash
 $ ./readtime -help
-
 ```
 
 ## Contributing
